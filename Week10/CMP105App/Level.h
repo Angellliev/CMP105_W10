@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 #include "PlatformTiles.h"
+#include "Player.h"
+#include "Framework/Collision.h"
 
 class Level{
 public:
@@ -24,4 +26,5 @@ private:
 	sf::RenderWindow* window;
 	Input* input;
 	PlatformTiles platformTiles;
+	Player player;
 };

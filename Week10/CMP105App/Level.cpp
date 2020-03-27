@@ -6,7 +6,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	input = in;
 
 	// initialise game objects
-
+	player.setInput(input);
 }
 
 Level::~Level()
@@ -23,13 +23,16 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
-	
+	player.update(dt);
+	platformTiles.collision(&player);
+
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
+	window->draw(player);
 	platformTiles.renderMap(window);
 	endDraw();
 }
@@ -37,6 +40,7 @@ void Level::render()
 // Begins rendering to the back buffer. Background colour set to light blue.
 void Level::beginDraw()
 {
+	
 	window->clear(sf::Color(100, 149, 237));
 }
 
