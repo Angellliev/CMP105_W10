@@ -65,23 +65,33 @@ void PlatformTiles::collision(Player* player)
 		{
 			if(Collision::checkBoundingBox(player, &(*world)[i]))
 			{
-				if (abs(player->getCenter().x - ((*world)[i].getPosition().x + (*world)[i].getSize().x /2)) < abs(player->getCenter().y - ((*world)[i].getPosition().y + (*world)[i].getSize().y / 2)))
+				if (abs(player->getCenter().x - ((*world)[i].getPosition().x + (*world)[i].getSize().x /2)) > abs(player->getCenter().y - ((*world)[i].getPosition().y + (*world)[i].getSize().y / 2)))
 				{
-					player->collisionResponse(&(*world)[i]);
-					player->isFalling = false;
+					
+				
+					
+					if (player->getCenter().x - ((*world)[i].getPosition().x + (*world)[i].getSize().x / 2) > 0)
+					{
+						player->setPosition((*world)[i].getPosition().x + (*world)[i].getSize().x, player->getPosition().y);
+					}
+					else if (player->getCenter().x - ((*world)[i].getPosition().x + (*world)[i].getSize().x / 2) < 0)
+					{
+						player->setPosition((*world)[i].getPosition().x - (*world)[i].getSize().x, player->getPosition().y);
+					}
 					
 				}
 				else
 				{
 					
-					player->setVelocity(0, 0);
-					player->sideTouch = false;
+					player->collisionResponse(&(*world)[i]);
+					player->isFalling = false;
+					
 				}
 			}
 			else
 			{
 				player->isFalling = true;
-				player->sideTouch = false;
+				
 			}
 		}
 	}

@@ -10,7 +10,7 @@ class Player :
 	
 	sf::Vector2f playerCenter;
 public:
-	bool sideTouch;
+
 	Player();
 	void update(float dt);
 	void playerMovement(float dt);

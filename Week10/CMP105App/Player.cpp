@@ -4,9 +4,9 @@ Player::Player()
 {
 	hasJumped = true;
 	isFalling = true;
-	sideTouch = false;
+	
 	playerTexture.loadFromFile("gfx/MushroomTrans.png");
-	setSize(sf::Vector2f(40, 40));
+	setSize(sf::Vector2f(32, 32));
 	setTexture(&playerTexture);
 	setCollisionBox(0, 0, getSize().x, getSize().y);
 	
@@ -22,27 +22,29 @@ void Player::update(float dt)
 		velocity.y += 1;
 	}
 	
+		
+	
+	
 	move(velocity * dt);
 	
 }
 
 void Player::playerMovement(float dt)
 {
-	if (!sideTouch)
-	{
-		if (input->isKeyDown(sf::Keyboard::A) && !sideTouch)
+
+	if (input->isKeyDown(sf::Keyboard::A))
 		{
 			velocity.x = -100;
 		}
-		else if (input->isKeyDown(sf::Keyboard::D) && !sideTouch)
+	else if (input->isKeyDown(sf::Keyboard::D))
 		{
 			velocity.x = 100;
 		}
-		else
+	else
 		{
 			velocity.x = 0;
 		}
-	}
+	
 
 	if (input->isKeyDown(sf::Keyboard::Space) && !hasJumped)
 	{
@@ -69,6 +71,6 @@ sf::Vector2f Player::getCenter()
 void Player::sideCollisionResponse(GameObject* collider)
 {
 	
-	velocity.x = 0;
+	
 	
 }
